@@ -1,0 +1,295 @@
+.cw-openai-chat-modal {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: min(1480px, calc(100vw - 32px));
+}
+
+.cw-openai-chat-modal .modal-header,
+.cw-openai-chat-modal .openai-chat-modal-footer {
+  padding-inline: 24px;
+}
+
+.cw-openai-chat-modal .openai-chat-modal-body {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  min-height: min(80vh, 880px);
+  overflow: hidden;
+  background: #f7f9fd;
+}
+
+.cw-openai-chat-modal .openai-chat-modal-tablist {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: 18px 14px;
+  border-right: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.cw-openai-chat-modal .openai-chat-modal-tab {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  min-height: 58px;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cw-openai-chat-modal .openai-chat-modal-tab span,
+.cw-openai-chat-modal .openai-chat-modal-tab small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cw-openai-chat-modal .openai-chat-modal-tab span {
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.cw-openai-chat-modal .openai-chat-modal-tab small {
+  font-size: 0.76rem;
+}
+
+.cw-openai-chat-modal .openai-chat-modal-tab[aria-selected="true"] {
+  border-color: rgba(106, 90, 249, 0.5);
+  background: #f5f3ff;
+  color: var(--accent-strong);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.cw-openai-chat-modal .openai-chat-modal-tab:focus-visible {
+  outline: none;
+  border-color: rgba(106, 90, 249, 0.75);
+  box-shadow: 0 0 0 4px rgba(106, 90, 249, 0.12);
+}
+
+.cw-openai-chat-modal .openai-chat-modal-panels,
+.cw-openai-chat-modal .openai-chat-modal-panel {
+  min-width: 0;
+  min-height: 0;
+}
+
+.cw-openai-chat-modal .openai-chat-modal-panels {
+  overflow: hidden;
+}
+
+.cw-openai-chat-modal .openai-chat-modal-panel {
+  height: 100%;
+  overflow: auto;
+  padding: 22px 24px;
+}
+
+.cw-openai-chat-modal .openai-chat-modal-panel[hidden] {
+  display: none;
+}
+
+.cw-openai-chat-modal .openai-chat-attributes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.cw-openai-chat-modal .openai-chat-modal-section,
+.cw-openai-chat-modal .openai-chat-prompt-editor,
+.cw-openai-chat-modal .openai-chat-reference-panel,
+.cw-openai-chat-modal .openai-chat-last-response-layout {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.cw-openai-chat-modal .openai-chat-modal-section {
+  padding: 16px;
+}
+
+.cw-openai-chat-modal .openai-chat-config-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.cw-openai-chat-modal .openai-chat-prompt-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 320px);
+  gap: 18px;
+  min-height: 100%;
+}
+
+.cw-openai-chat-modal .openai-chat-prompt-editor {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  min-height: min(72vh, 800px);
+  padding: 18px;
+}
+
+.cw-openai-chat-modal .openai-chat-prompt-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.cw-openai-chat-modal .openai-chat-prompt-header h3 {
+  margin: 4px 0 2px;
+  font-size: 1.15rem;
+}
+
+.cw-openai-chat-modal .openai-chat-prompt-header p,
+.cw-openai-chat-modal .openai-chat-last-response-header p,
+.cw-openai-chat-modal .openai-chat-last-response-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.cw-openai-chat-modal .openai-chat-system-field textarea {
+  min-height: 120px;
+  font-family: var(--mono);
+}
+
+.cw-openai-chat-modal .openai-chat-instruction-field {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 0;
+  margin-bottom: 0;
+}
+
+.cw-openai-chat-modal .openai-chat-instruction-field textarea {
+  min-height: min(46vh, 520px);
+  resize: vertical;
+  font-family: var(--mono);
+  font-size: 0.94rem;
+  line-height: 1.58;
+}
+
+.cw-openai-chat-modal .openai-chat-reference-panel {
+  align-self: start;
+  padding: 16px;
+  position: sticky;
+  top: 0;
+}
+
+.cw-openai-chat-modal .openai-chat-reference-list {
+  display: grid;
+  gap: 10px;
+}
+
+.cw-openai-chat-modal .openai-chat-reference-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fbfcff;
+}
+
+.cw-openai-chat-modal .openai-chat-reference-row code {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cw-openai-chat-modal .openai-chat-reference-row strong,
+.cw-openai-chat-modal .openai-chat-reference-row small {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cw-openai-chat-modal .openai-chat-last-response-layout {
+  display: grid;
+  gap: 16px;
+  min-height: min(72vh, 800px);
+  padding: 18px;
+}
+
+.cw-openai-chat-modal .openai-chat-last-response-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cw-openai-chat-modal .openai-chat-last-response-output {
+  min-height: min(60vh, 660px);
+  max-height: min(60vh, 660px);
+  margin: 0;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #0f172a;
+  color: #dbeafe;
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  padding: 14px;
+}
+
+.cw-openai-chat-modal .openai-chat-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 14px;
+  border-top: 1px solid var(--line);
+  background: #ffffff;
+}
+
+@media (max-width: 1180px) {
+  .cw-openai-chat-modal .openai-chat-attributes-grid,
+  .cw-openai-chat-modal .openai-chat-config-grid,
+  .cw-openai-chat-modal .openai-chat-prompt-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cw-openai-chat-modal .openai-chat-reference-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 860px) {
+  .cw-openai-chat-modal {
+    width: min(100%, calc(100vw - 16px));
+  }
+
+  .cw-openai-chat-modal .openai-chat-modal-body {
+    grid-template-columns: minmax(0, 1fr);
+    overflow: auto;
+  }
+
+  .cw-openai-chat-modal .openai-chat-modal-tablist {
+    display: flex;
+    overflow-x: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cw-openai-chat-modal .openai-chat-modal-tab {
+    min-width: 180px;
+  }
+
+  .cw-openai-chat-modal .openai-chat-modal-panel {
+    overflow: visible;
+    padding: 16px;
+  }
+}

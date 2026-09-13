@@ -1,0 +1,62 @@
+{
+  "kind": "openai_chat",
+  "title": "OpenAI Chat",
+  "ports": {
+    "inputs": [
+      {
+        "id": 1,
+        "name": "in",
+        "title": "In",
+        "accepts": [
+          "message/*",
+          "text/plain",
+          "application/json"
+        ],
+        "multiplicity": "many",
+        "required": false,
+        "execution_requirement": "required_for_execution"
+      }
+    ],
+    "outputs": [
+      {
+        "id": 1,
+        "name": "response",
+        "title": "Response",
+        "emits": [
+          "message/*",
+          "text/plain"
+        ],
+        "multiplicity": "many",
+        "instruction": ""
+      },
+      {
+        "id": 2,
+        "name": "raw_json",
+        "title": "Raw JSON",
+        "emits": [
+          "application/json",
+          "message/*"
+        ],
+        "multiplicity": "many"
+      }
+    ]
+  },
+  "config": {
+    "model": "gpt-5.5",
+    "api_key": "",
+    "api_base_url": "https://api.openai.com",
+    "system_instruction": "",
+    "reasoning_effort": "default",
+    "max_output_tokens": 0,
+    "history_turns": 5,
+    "timeout_sec": 120,
+    "max_prompt_chars": 250000
+  },
+  "runtime": {
+    "initial_state": "waiting",
+    "runtime_executable": true,
+    "active_worker": true,
+    "centralized_executor": "generic",
+    "centralized_dependency_mode": "all_inputs"
+  }
+}
