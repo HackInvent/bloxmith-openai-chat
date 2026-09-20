@@ -54,7 +54,7 @@ from block_test_packages import install_test_package, release_key, surface_paylo
 
 
 SECRET = "sk-test-openai-chat-secret"
-ANSWER = "bonjour depuis le faux openai chat"
+ANSWER = "hello from the fake openai chat"
 
 
 class FakeOpenAiChatHttpServer(ThreadingHTTPServer):
@@ -195,13 +195,13 @@ def run_openai_chat_case(runtime_mode: str, fake_server: FakeOpenAiChatHttpServe
         "The text response must leave on the response port.",
     )
     raw_json = run.get("output_values", {}).get("openai-chat-1:2", {}).get("value") or ""
-    expect("resp_test_openai_chat" in raw_json and ANSWER in raw_json, "La reponse JSON brute doit sortir sur raw_json.")
-    expect(SECRET not in logs and SECRET not in node_logs, "La cle API ne doit pas apparaitre dans les logs.")
-    expect("fallback centralized" not in logs, "Le run ne doit pas fallback centralise.")
+    expect("resp_test_openai_chat" in raw_json and ANSWER in raw_json, "The raw JSON response must be published on raw_json.")
+    expect(SECRET not in logs and SECRET not in node_logs, "The API key must not appear in the logs.")
+    expect("fallback centralized" not in logs, "The run must not fall back to centralized.")
     if runtime_mode == "zeromq_active":
         expect(
             run.get("results", {}).get("openai-chat-1", {}).get("transport") == "zeromq_active",
-            "openai_chat doit etre execute via zeromq_active.",
+            "openai_chat must run through zeromq_active.",
         )
     return run
 
@@ -209,7 +209,7 @@ def run_openai_chat_case(runtime_mode: str, fake_server: FakeOpenAiChatHttpServe
 def test_http_requests(fake_server: FakeOpenAiChatHttpServer) -> None:
     """TC1 - Verify OpenAI-compatible Responses API requests."""
 
-    expect(len(fake_server.requests_log) >= 2, "Le faux endpoint Chat doit recevoir une requete par run.")
+    expect(len(fake_server.requests_log) >= 2, "The fake Chat endpoint must receive one request per run.")
     for request in fake_server.requests_log:
         payload = request["payload"]
         expect(request["path"] == "/v1/responses", "The block must call /v1/responses.")
@@ -327,19 +327,19 @@ def test_openai_chat_ui_contract(fake_server: FakeOpenAiChatHttpServer) -> None:
     css = (ROOT / "blocs/openai_chat/assets/css/block_modal.css").read_text(encoding="utf-8")
     js = (ROOT / "blocs/openai_chat/assets/js/block_modal.js").read_text(encoding="utf-8")
 
-    expect("cw-openai-chat-modal" in html, "Le modal OpenAI Chat doit venir du bloc.")
-    expect('data-block-runtime-refresh="autonomous"' in html, "Le modal OpenAI Chat doit gerer son refresh runtime.")
+    expect("cw-openai-chat-modal" in html, "The OpenAI Chat modal must come from the block.")
+    expect('data-block-runtime-refresh="autonomous"' in html, "The OpenAI Chat modal must own its runtime refresh.")
     expect('data-openai-chat-tab-id="prompt"' in html, "The modal must expose the Prompt tab.")
     expect('data-openai-chat-tab-id="attributes"' in html, "The modal must expose the Attributs tab.")
     expect('data-openai-chat-tab-id="last-response"' in html, "The modal must expose the Last response tab.")
     expect('data-block-output-field="instruction"' in html, "L'instruction doit rester liee a output.instruction.")
     expect('data-block-config-field="model"' in html, "Le modele must be editable.")
-    expect('data-block-config-field="api_key"' in html, "La cle API must be editable.")
+    expect('data-block-config-field="api_key"' in html, "The API key must be editable.")
     expect('data-block-config-field="history_turns"' in html, "Le nombre d'echanges memorises must be editable.")
     expect(SECRET not in html, "The API key must not be rendered in clear text in the modal.")
-    expect("gpt-5.5" in html and "gpt-5-chat-latest" in html, "Les modeles GPT-5.x/chat doivent etre proposes.")
-    expect(".openai-chat-modal-panel[hidden]" in css, "Le CSS doit cacher les panels inactifs.")
-    expect("export function mount" in js, "Le JS doit monter le modal via le registre block UI.")
+    expect("gpt-5.5" in html and "gpt-5-chat-latest" in html, "The GPT-5.x/chat models must be offered.")
+    expect(".openai-chat-modal-panel[hidden]" in css, "The CSS must hide the inactive panels.")
+    expect("export function mount" in js, "The JS must mount the modal through the block UI registry.")
 
     inspector = render_block_inspector_panel("openai_chat", {"node": node})
     inspector_html = str(inspector.get("html") or "")
@@ -350,7 +350,7 @@ def test_openai_chat_ui_contract(fake_server: FakeOpenAiChatHttpServer) -> None:
 
     card = render_block_node_card("openai_chat", {"node": node})
     card_html = str(card.get("html") or "")
-    expect("data-openai-chat-node-card" in card_html, "La node-card OpenAI Chat doit venir du bloc.")
+    expect("data-openai-chat-node-card" in card_html, "The OpenAI Chat node card must come from the block.")
 
 
 def main() -> None:
