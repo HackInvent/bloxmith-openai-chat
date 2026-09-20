@@ -519,17 +519,17 @@ class OpenAiChatBlock(BlockDefinition):
             '</textarea>'
             '</div>'
             '<div class="field-group openai-chat-instruction-field">'
-            '<label>Instruction de sortie</label>'
+            '<label>Output instruction</label>'
             '<textarea data-openai-chat-instruction data-block-output-field="instruction" '
             f'data-block-output-port-id="{escape(str(port_id), quote=True)}" rows="18" spellcheck="false" '
-            'placeholder="Decris ce que le modele doit produire avec les inputs recus.">'
+            'placeholder="Describe what the model must produce from the received inputs.">'
             f'{escape(instruction)}'
             '</textarea>'
             '</div>'
             '</div>'
             '<aside class="openai-chat-reference-panel">'
             '<div class="ports-editor-header"><span class="group-label">Inputs disponibles</span></div>'
-            '<p class="field-hint">Les inputs sont inclus automatiquement dans le prompt final.</p>'
+            '<p class="field-hint">Inputs are included in the final prompt automatically.</p>'
             f'{self._render_input_references(node)}'
             '</aside>'
             '</div>'
@@ -590,13 +590,13 @@ class OpenAiChatBlock(BlockDefinition):
             '<div class="openai-chat-last-response-layout">'
             '<div class="openai-chat-last-response-header">'
             '<div>'
-            '<span class="group-label">Derniere reponse</span>'
+            '<span class="group-label">Last response</span>'
             '<h3>Last response</h3>'
-            '<p>Reponse JSON brute conservee dans le dernier etat runtime.</p>'
+            '<p>Raw JSON response kept in the last runtime state.</p>'
             '</div>'
             f'<button class="ghost-btn openai-chat-last-response-copy{response_class}" data-block-modal-copy="#{escape(source_id, quote=True)}" type="button">Copier</button>'
             '</div>'
-            f'<p class="openai-chat-last-response-empty{empty_class}">Aucune reponse OpenAI Chat enregistree pour ce bloc.</p>'
+            f'<p class="openai-chat-last-response-empty{empty_class}">No OpenAI Chat response recorded for this block.</p>'
             f'<pre class="openai-chat-last-response-output{response_class}" id="{escape(source_id, quote=True)}" data-block-modal-copy-source>{escape(response)}</pre>'
             '</div>'
             '</section>'
@@ -628,7 +628,7 @@ class OpenAiChatBlock(BlockDefinition):
             f'<input data-block-config-field="max_output_tokens" data-block-value-type="integer" type="number" min="0" max="{MAX_OUTPUT_TOKENS_LIMIT}" step="1" value="{config["max_output_tokens"]}" />'
             '</div>'
             '<div class="field-group">'
-            '<label>Historique échanges</label>'
+            '<label>Conversation history</label>'
             f'<input data-block-config-field="history_turns" data-block-value-type="integer" type="number" min="0" max="50" step="1" value="{config["history_turns"]}" />'
             '</div>'
             '<div class="field-group">'
@@ -640,7 +640,7 @@ class OpenAiChatBlock(BlockDefinition):
             f'<input data-block-config-field="max_prompt_chars" data-block-value-type="integer" type="number" min="1" max="{MAX_PROMPT_CHARS}" step="1000" value="{config["max_prompt_chars"]}" />'
             '</div>'
             '</div>'
-            '<p class="field-hint">Le bloc appelle <code>/v1/responses</code>. Laisse reasoning effort sur <code>default</code> pour omettre le parametre.</p>'
+            '<p class="field-hint">The block calls <code>/v1/responses</code>. Leave reasoning effort on <code>default</code> to omit the parameter.</p>'
         )
 
     def _render_title_field(self, title: str) -> str:
@@ -648,7 +648,7 @@ class OpenAiChatBlock(BlockDefinition):
 
         return (
             '<div class="field-group">'
-            '<label>Nom du bloc</label>'
+            '<label>Block name</label>'
             f'<input data-block-title-field type="text" autocomplete="off" value="{escape(title, quote=True)}" />'
             '</div>'
         )
@@ -658,7 +658,7 @@ class OpenAiChatBlock(BlockDefinition):
 
         inputs = node.get("inputs") if isinstance(node.get("inputs"), list) else []
         if not inputs:
-            return '<div class="ports-editor-empty">Aucune entree disponible.</div>'
+            return '<div class="ports-editor-empty">No input available.</div>'
         rows: list[str] = []
         for index, port in enumerate(inputs):
             if not isinstance(port, dict):
